@@ -3,6 +3,7 @@ package com.FindYourRide.Routing.resources;
 import com.FindYourRide.Routing.Model.Coordinates;
 import com.FindYourRide.Routing.Model.Route;
 import com.FindYourRide.Routing.Model.User;
+import com.FindYourRide.Routing.Operations.MatchMaking;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.mongodb.core.MongoOperations;
@@ -11,12 +12,10 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.web.bind.annotation.*;
 
-import javax.websocket.server.PathParam;
 import java.sql.Time;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 
 @RestController
@@ -43,14 +42,9 @@ public class AddTrip {
         Coordinates departureCoordinate = Coordinates.toCoordinates(departureCoordinateLatString, departureCoordinateLongString);
         Coordinates destinationCoordinate = Coordinates.toCoordinates(destinationCoordinateLatString, destinationCoordinateLongString);
 
-        DateFormat formatter = new SimpleDateFormat("HH:mm");
         Date departureDate = new Date(departureDateString);
-        Time departureTime = null;
-        try {
-            departureTime = new Time(formatter.parse(departureTimeString).getTime());
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        Time departureTime = new Time(Long.parseLong(departureTimeString));
+        System.out.println(departureTime.toString());
 
         Query query = new Query(Criteria.where("userId").is(userId));
 
@@ -67,7 +61,10 @@ public class AddTrip {
         {
             ++emptySpace;
         }
+        String ans = "";
         if(emptySpace < 10) {
+            // match making algorithm
+            ans = MatchMaking.findMatch(insertObj);
             trips[emptySpace] = insertObj;
         }
         else
@@ -76,7 +73,9 @@ public class AddTrip {
         }
         Update update = new Update().set("trips", trips);
         mongoOperations.updateFirst(query, update, User.class);
-        return "trip added successfully";
+        String returningString = "trip added successfully" + ans;
+        System.out.println(returningString);
+        return returningString;
 
     }
 

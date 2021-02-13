@@ -12,25 +12,29 @@ public class Route {
     private Coordinates departureCoordinate;
     private Coordinates destinationCoordinate;
     private boolean hosted;
-
-    public Route(String userId, Date departureDate, Time departureTime, Coordinates departureCoordinate, Coordinates destinationCoordinate, boolean hosted) {
-        this.userId = userId;
-        this.departureDate = departureDate;
-        this.departureTime = departureTime;
-        this.departureCoordinate = departureCoordinate;
-        this.destinationCoordinate = destinationCoordinate;
-        this.hosted = hosted;
-    }
-
-    public Route(String userId, String departureLocation, String destinationLocation, Date departureDate, Time departureTime, Coordinates departureCoordinate, Coordinates destinationCoordinate, boolean hosted) {
-        this.userId = userId;
-        this.departureLocation = departureLocation;
-        DestinationLocation = destinationLocation;
-        this.departureDate = departureDate;
-        this.departureTime = departureTime;
-        this.departureCoordinate = departureCoordinate;
-        this.destinationCoordinate = destinationCoordinate;
-    }
+//
+//    public Route() {
+//
+//    }
+//
+//    public Route(String userId, Date departureDate, Time departureTime, Coordinates departureCoordinate, Coordinates destinationCoordinate, boolean hosted) {
+//        this.userId = userId;
+//        this.departureDate = departureDate;
+//        this.departureTime = departureTime;
+//        this.departureCoordinate = departureCoordinate;
+//        this.destinationCoordinate = destinationCoordinate;
+//        this.hosted = hosted;
+//    }
+//
+//    public Route(String userId, String departureLocation, String destinationLocation, Date departureDate, Time departureTime, Coordinates departureCoordinate, Coordinates destinationCoordinate, boolean hosted) {
+//        this.userId = userId;
+//        this.departureLocation = departureLocation;
+//        DestinationLocation = destinationLocation;
+//        this.departureDate = departureDate;
+//        this.departureTime = departureTime;
+//        this.departureCoordinate = departureCoordinate;
+//        this.destinationCoordinate = destinationCoordinate;
+//    }
 
     public String getUserId() {
         return userId;
